@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  autogen_test:
+    build:
+      context: ./import
+
+  autogen_dev_service:
+    image: autogen_dev_img:latest

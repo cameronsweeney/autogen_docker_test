@@ -8,7 +8,7 @@ config_list = [
     {
         "model": "mistralai/Mistral-7B-Instruct-v0.2", #the name of your running model
         # https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2
-        "base_url": "https://sapphire-hospitals-copied-gross.trycloudflare.com/v1", #the local address of the api
+        "base_url": "https://bedding-ict-casa-comparative.trycloudflare.com/v1", #the local address of the api
         # base_url modified from api_base 
         "api_type": "open_ai",
         "api_key": "sk-111111111111111111111111111111111111111111111111", # just a placeholder
@@ -77,9 +77,12 @@ manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=agent_config)
 user_proxy.initiate_chat(
     manager,
     message="""
-Find the current date and time on the host system and write it to a file called datetime.txt
+<s> [INST] Find the current date and time on the host system and write it to a file called datetime.txt [/INST] </s>
 """,
 )
+
+# <s> [INST] Instruction [/INST] Model answer</s> [INST] Follow-up instruction [/INST]
+
 
 # to followup of the previous question, use:
 # user_proxy.send(

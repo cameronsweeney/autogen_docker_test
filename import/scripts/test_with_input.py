@@ -3,12 +3,20 @@
 
 import autogen
 
+base_url = input("Please enter the API endpoint for Ooba Booga (include '/v1'at the end): ")
+
+chat_prompt = input("Please give instructions to send to Ooba Booga. Be as detailed as possible: ")
+
+chat_prompt = "<s> [INST] " + chat_prompt + "[/INST] </s>"
+
+# <s> [INST] Instruction [/INST] Model answer</s> [INST] Follow-up instruction [/INST]
+
 #Use the local LLM server same as before
 config_list = [
     {
         "model": "mistralai/Mistral-7B-Instruct-v0.2", #the name of your running model
         # https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2
-        "base_url": "https://api.openai.com/v1", #the local address of the api
+        "base_url": base_url, #the local address of the api
         # base_url modified from api_base 
         "api_type": "open_ai",
         "api_key": "sk-111111111111111111111111111111111111111111111111", # just a placeholder
@@ -76,10 +84,14 @@ manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=agent_config)
 # Start the Chat!
 user_proxy.initiate_chat(
     manager,
-    message="""
-Find the current date and time on the host system and write it to a file called datetime.txt
-""",
+    message=chat_prompt,
+    # """
+    # <s> [INST] Find the current date and time on the host system and write it # to a file called datetime.txt [/INST] </s>
+    # """,
 )
+
+
+
 
 # to followup of the previous question, use:
 # user_proxy.send(

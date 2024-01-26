@@ -1,11 +1,20 @@
+# This Dockerfile is modified from the dev Dockerfile on the AutoGen repository.
+# https://github.com/microsoft/autogen/blob/main/.devcontainer/dev/Dockerfile
+# These changes fixed some fatal build errors I kept getting on Windows.
+
 # Basic setup
 FROM python:3.11-slim-bookworm
 
 # Update and install necessary packages
 RUN apt-get update && apt-get -y update
+
+# For some reason, I had trouble connecting to the debian server with apt-get
+# I tried to ping the server to troubleshoot the network error & test if I could connect to the internet at all.
+# I don't know why, but I can't build this image on my machine when I remove the following commands - maybe you don't need them, but it may solve a weird error for you.
 RUN apt-get install -y iputils-ping
 RUN ping -c 4 deb.debian.org
-# added vim and nano for convenience
+
+# I also had trouble installing all of the following packages with just one command. Splitting them into separate commands increased my chances of building successfully.
 RUN apt-get install -y curl
 RUN apt-get install -y sudo
 RUN apt-get install -y git
