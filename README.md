@@ -1,7 +1,5 @@
 # Getting AutoGen up & running in Docker
 
-(still a work in progress, but the script runs!)
-
 ## Preface: set up Ooba Booga backend
 
 1. First first, get Ooba Booga up and running in a Colab notebook. 
