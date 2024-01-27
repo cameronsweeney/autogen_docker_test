@@ -77,3 +77,5 @@ python test_with_input.py
 
 3. `test.py` has a hard-coded API endpoint (which you edited in the first part of this walkthrough), as well as a hard-coded instruction message. It will write the current date and time to `./paper/datetime.txt`.
 4. Use `test_with_input.py` if you'd like to enter a new API endpoint and/or new instruction prompt without rebuilding the current Docker image.
+
+Note: If you're running a script of multiple agents, try disabling lines 243-249 in groupchat.py from autogen/contrib. It's a check for running one agent, but it'll bog speed and consume more tokens with a multi-agent script if the check is left active. The "failed to resolve next speaker" dialogue can be resolved by disabling it.
